@@ -76,7 +76,7 @@ const ProductScreen = () => {
                   <ListGroupItem>
                     <Row>
                       <Col>Price:</Col>
-                      <Col>{product.price}</Col>
+                      <Col>${product.price}</Col>
                     </Row>
                   </ListGroupItem>
                 </ListGroup>

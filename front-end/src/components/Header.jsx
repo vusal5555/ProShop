@@ -5,13 +5,28 @@ import logo from "../assets/logo.png";
 import { LinkContainer } from "react-router-bootstrap";
 import { useSelector } from "react-redux";
 import { Badge } from "react-bootstrap";
+import { useLogoutMutation } from "../slices/usersApiSlice";
+import { unsetCredentials } from "../slices/authSlice";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const { cartItems } = useSelector((state) => state.cart);
   const { userInfo } = useSelector((state) => state.auth);
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [logout, { isLoading }] = useLogoutMutation();
+
   const logoutHandler = async () => {
-    console.log("log out");
+    try {
+      const res = await logout().unwrap();
+      dispatch(unsetCredentials({ ...res }));
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
