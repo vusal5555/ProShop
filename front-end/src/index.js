@@ -6,6 +6,7 @@ import "./assets/styles/index.css";
 import App from "./App";
 import HomeScreen from "./screens/HomeScreen";
 import reportWebVitals from "./reportWebVitals";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -22,6 +23,12 @@ import ShippingScreen from "./screens/ShippingScreen";
 import PriveRoute from "./components/PriveRoute";
 import PaymentScreen from "./screens/PaymentScree";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
+import OrderScreen from "./screens/OrderScreen";
+import ProfileScreen from "./screens/ProfileScreen";
+import AdminRoute from "./components/AdminRoute";
+import OrderListScreen from "./screens/admin/OrderListScreen";
+import ProductListScreen from "./screens/admin/ProductListScreen";
+import ProductEdit from "./screens/admin/ProductEdit";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -51,6 +58,25 @@ const router = createBrowserRouter(
           path="/placeorder"
           element={<PlaceOrderScreen></PlaceOrderScreen>}
         ></Route>
+        <Route path="/order/:id" element={<OrderScreen></OrderScreen>}></Route>
+        <Route
+          path="/profile"
+          element={<ProfileScreen></ProfileScreen>}
+        ></Route>
+      </Route>
+      <Route path="" element={<AdminRoute></AdminRoute>}>
+        <Route
+          path="/admin/orderList"
+          element={<OrderListScreen></OrderListScreen>}
+        ></Route>
+        <Route
+          path="/admin/productList"
+          element={<ProductListScreen></ProductListScreen>}
+        ></Route>
+        <Route
+          path="/admin/product/:id/edit"
+          element={<ProductEdit></ProductEdit>}
+        ></Route>
       </Route>
     </Route>
   )
@@ -60,7 +86,9 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router}></RouterProvider>
+      <PayPalScriptProvider deferLoading={false}>
+        <RouterProvider router={router}></RouterProvider>
+      </PayPalScriptProvider>
     </Provider>
   </React.StrictMode>
 );
