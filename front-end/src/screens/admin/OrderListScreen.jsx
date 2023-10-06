@@ -34,7 +34,7 @@ const OrderListScreen = () => {
               return (
                 <tr key={index}>
                   <td>{order._id}</td>
-                  <td>{order.user.name}</td>
+                  <td>{order.name}</td>
                   <td>{order.createdAt.substring(0, 10)}</td>
                   <td>${order.totalPrice}</td>
                   <td>

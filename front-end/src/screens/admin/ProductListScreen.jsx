@@ -9,11 +9,19 @@ import Message from "../../components/Message";
 import Loader from "../../components/Loader";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import { toast } from "react-toastify";
+import { useDeleteProductMutation } from "../../slices/productApiSlice";
+import { useParams } from "react-router-dom";
+import Paginate from "../../components/Paginate";
 
 const ProductListScreen = () => {
-  const { data: products, isLoading, error, refetch } = useGetProductsQuery();
+  const { pageNumber } = useParams();
+  const { data, isLoading, error, refetch } = useGetProductsQuery({
+    pageNumber,
+  });
   const [createProduct, { isLaoding: productLoading, error: productError }] =
     useCreateProductMutation();
+  const [deleteProduct, { isLaoding: deleteLoading }] =
+    useDeleteProductMutation();
 
   const createProductHandler = async () => {
     try {
@@ -24,9 +32,14 @@ const ProductListScreen = () => {
     }
   };
 
-  const deleteHandler = (id) => {
+  const deleteHandler = async (id) => {
     // products.filter((product) => product._id !== id);
-    console.log(id);
+    try {
+      await deleteProduct(id);
+      refetch();
+    } catch (error) {
+      toast.error(error?.data?.message);
+    }
   };
 
   return (
@@ -43,6 +56,7 @@ const ProductListScreen = () => {
       </Row>
 
       {productLoading && <Loader></Loader>}
+      {deleteLoading && <Loader></Loader>}
 
       {isLoading ? (
         <Loader></Loader>
@@ -62,7 +76,7 @@ const ProductListScreen = () => {
               </tr>
             </thead>
             <tbody>
-              {products.map((product, index) => {
+              {data.products.map((product, index) => {
                 return (
                   <tr key={index}>
                     <td>{product._id}</td>
@@ -89,6 +103,11 @@ const ProductListScreen = () => {
               })}
             </tbody>
           </Table>
+          <Paginate
+            pages={data.pages}
+            page={data.page}
+            isAdmin={true}
+          ></Paginate>
         </>
       )}
     </>
