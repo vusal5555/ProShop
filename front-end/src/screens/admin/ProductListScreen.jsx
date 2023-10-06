@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   useGetProductsQuery,
   useCreateProductMutation,
@@ -18,7 +18,7 @@ const ProductListScreen = () => {
   const { data, isLoading, error, refetch } = useGetProductsQuery({
     pageNumber,
   });
-  const [createProduct, { isLaoding: productLoading, error: productError }] =
+  const [createProduct, { isLaoding: productLoading }] =
     useCreateProductMutation();
   const [deleteProduct, { isLaoding: deleteLoading }] =
     useDeleteProductMutation();

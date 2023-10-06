@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
+import { Button, Row, Col, ListGroup, Image } from "react-bootstrap";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { toast } from "react-toastify";
 import Loader from "../components/Loader";

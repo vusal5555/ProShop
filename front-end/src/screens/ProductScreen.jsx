@@ -15,7 +15,6 @@ import {
 import Rating from "../components/Rating";
 import {
   useGetProductDetailsQuery,
-  useCreateProductMutation,
   useCreateReviewMutation,
 } from "../slices/productApiSlice";
 import Loader from "../components/Loader";
@@ -23,6 +22,7 @@ import Message from "../components/Message";
 import { addToCart } from "../slices/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import Meta from "../components/Meta";
 
 const ProductScreen = () => {
   const { id } = useParams();
@@ -42,7 +42,7 @@ const ProductScreen = () => {
 
   const { userInfo } = useSelector((store) => store.auth);
 
-  const [createReview, { isLoading: isReviewLoading, error: reviewError }] =
+  const [createReview, { isLoading: isReviewLoading }] =
     useCreateReviewMutation();
 
   if (!isLoading) {
@@ -76,6 +76,7 @@ const ProductScreen = () => {
         <Message variant="danger">{error?.data?.message}</Message>
       ) : (
         <div>
+          <Meta title={product.name}></Meta>
           <Link to="/" className="btn btn-light my-3">
             Go Back
           </Link>

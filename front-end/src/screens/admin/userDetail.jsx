@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
@@ -17,8 +17,6 @@ const UserDetail = () => {
   const [email, setEmail] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
 
-  const navigate = useNavigate();
-
   const {
     data: user,
     isLoading,
@@ -26,8 +24,7 @@ const UserDetail = () => {
     error,
   } = useGetUserDetailsQuery(userId);
 
-  const [updateUser, { isLoading: updateLoading, error: updateError }] =
-    useUpdateUserMutation();
+  const [updateUser, { isLoading: updateLoading }] = useUpdateUserMutation();
 
   useEffect(() => {
     if (user) {

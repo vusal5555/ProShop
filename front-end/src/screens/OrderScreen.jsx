@@ -17,10 +17,8 @@ import { useSelector } from "react-redux";
 const OrderScreen = () => {
   const { id: orderId } = useParams();
 
-  const [
-    updateOrderToDelivered,
-    { isLoading: orderDeliverLoading, error: orderDeliverError },
-  ] = useUpdateOrderToDeliveredMutation();
+  const [updateOrderToDelivered, { isLoading: orderDeliverLoading }] =
+    useUpdateOrderToDeliveredMutation();
 
   const {
     data: order,
@@ -37,7 +35,7 @@ const OrderScreen = () => {
 
   const {
     data: paypal,
-    isLoading: loadingPayPal,
+
     error: errorPayPal,
   } = useGetPayPalClientIdQuery();
 

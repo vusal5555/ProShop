@@ -27,15 +27,13 @@ const ProductEdit = () => {
   const {
     data: product,
     isLoading,
-    refetch,
     error,
   } = useGetProductDetailsQuery(productId);
 
-  const [updateProduct, { isLoading: updateLoading, error: updateError }] =
+  const [updateProduct, { isLoading: updateLoading }] =
     useUpdateProductMutation();
 
-  const [uploadProductImage, { isLoading: loadingUpload }] =
-    useUploadProductImageMutation();
+  const [uploadProductImage] = useUploadProductImageMutation();
 
   useEffect(() => {
     if (product) {

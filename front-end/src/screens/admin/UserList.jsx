@@ -4,7 +4,7 @@ import {
   useGetUsersQuery,
 } from "../../slices/usersApiSlice";
 import { LinkContainer } from "react-router-bootstrap";
-import { Table, Button, Row, Col } from "react-bootstrap";
+import { Table, Button } from "react-bootstrap";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
 import { FaTrash, FaEdit } from "react-icons/fa";

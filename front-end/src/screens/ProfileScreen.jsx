@@ -20,7 +20,7 @@ const ProfileScreen = () => {
 
   const { userInfo } = useSelector((store) => store.auth);
 
-  const [profile, { isLoading, error }] = useProfileMutation();
+  const [profile, { isLoading }] = useProfileMutation();
   const {
     data: orders,
     isLoading: orderLoading,

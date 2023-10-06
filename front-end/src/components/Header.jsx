@@ -18,7 +18,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [logout, { isLoading }] = useLogoutMutation();
+  const [logout] = useLogoutMutation();
 
   const logoutHandler = async () => {
     try {
